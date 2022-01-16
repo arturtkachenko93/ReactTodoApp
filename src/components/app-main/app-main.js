@@ -4,10 +4,10 @@ import TaskList from "../todo-list";
 import AppFooter from "../app-footer";
 import './app-main.css';
 
-const AppMain = ({ todos }) => {
+const AppMain = ({ todos, onCompleted }) => {
   return (
     <section className='main' >
-      <TaskList todos={ todos } />
+      <TaskList todos={ todos } onCompleted={onCompleted}/>
       <AppFooter />
     </section>
   )
