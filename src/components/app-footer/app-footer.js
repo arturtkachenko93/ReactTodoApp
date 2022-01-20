@@ -3,12 +3,18 @@ import React from "react";
 import TaskFilters from "../task-filters";
 import './app-footer.css';
 
-const AppFooter = () => {
+const AppFooter = ({ doneCount, clearTasks, filter, onFilterChange }) => {
+  
+  let todoCount = 'Нет задач!'
+  if(doneCount) {
+    todoCount = `${doneCount} items left`
+  }
+  
   return (
     <footer className="footer">
-      <span className="todo-count">1 items left</span>
-      <TaskFilters />
-      <button className="clear-completed">Clear completed</button>
+      <span className="todo-count">{todoCount}</span>
+      <TaskFilters filter={filter} onFilterChange={onFilterChange}/>
+      <button className="clear-completed" onClick={clearTasks}>Clear completed</button>
     </footer>
   )
 }
