@@ -23,7 +23,9 @@ export default class Task extends Component {
 
   render() {
     const { inputValue } = this.state;
-    const { description, time, id, done, edit, onCompleted, onEdited, onEdit, onDeleted } = this.props;
+    const {
+      description, time, id, done, edit, onCompleted, onEdited, onEdit, onDeleted,
+    } = this.props;
     this.onSubmit = (e) => {
       e.preventDefault();
       onEdit(id, inputValue);

@@ -5,14 +5,14 @@ import './app-header.css';
 import App from '../app';
 import PropTypes from 'prop-types';
 
-const AppHeader = ({ onAddItem }) => {
+function AppHeader({ onAddItem }) {
   return (
     <header className="header">
       <h1>todos</h1>
       <NewTaskForm onAddItem={onAddItem} />
     </header>
   );
-};
+}
 
 AppHeader.defaultProps = {
   onAddItem: () => {},

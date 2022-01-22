@@ -5,7 +5,7 @@ import TaskList from '../app-list-tasks';
 import AppFooter from '../app-footer';
 import './app-main.css';
 
-const AppMain = ({
+function AppMain({
   todos,
   onCompleted,
   onEdited,
@@ -15,14 +15,14 @@ const AppMain = ({
   clearTasks,
   filter,
   onFilterChange,
-}) => {
+}) {
   return (
     <section className="main">
       <TaskList todos={todos} onCompleted={onCompleted} onEdited={onEdited} onEdit={onEdit} onDeleted={onDeleted} />
       <AppFooter doneCount={doneCount} clearTasks={clearTasks} filter={filter} onFilterChange={onFilterChange} />
     </section>
   );
-};
+}
 
 AppMain.defaultProps = {
   todos: [],

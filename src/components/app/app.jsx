@@ -14,7 +14,7 @@ export default class App extends Component {
 
   addItem = (description) => {
     const newItem = {
-      description: description,
+      description,
       time: Date.now(),
       done: false,
       edit: false,
@@ -46,19 +46,15 @@ export default class App extends Component {
   };
 
   onCompleted = (id) => {
-    this.setState(({ tasks }) => {
-      return {
-        tasks: this.onDataChange(id, tasks, 'change', 'done'),
-      };
-    });
+    this.setState(({ tasks }) => ({
+      tasks: this.onDataChange(id, tasks, 'change', 'done'),
+    }));
   };
 
   onEdited = (id) => {
-    this.setState(({ tasks }) => {
-      return {
-        tasks: this.onDataChange(id, tasks, 'change', 'edit'),
-      };
-    });
+    this.setState(({ tasks }) => ({
+      tasks: this.onDataChange(id, tasks, 'change', 'edit'),
+    }));
   };
 
   onEdit = (id, newText) => {
@@ -73,11 +69,9 @@ export default class App extends Component {
   };
 
   onDeleted = (id) => {
-    this.setState(({ tasks }) => {
-      return {
-        tasks: this.onDataChange(id, tasks, 'deleted'),
-      };
-    });
+    this.setState(({ tasks }) => ({
+      tasks: this.onDataChange(id, tasks, 'deleted'),
+    }));
   };
 
   clearTasks = () => {

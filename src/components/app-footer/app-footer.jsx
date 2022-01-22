@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import TaskFilters from '../task-filters';
 import './app-footer.css';
 
-const AppFooter = ({ doneCount, clearTasks, filter, onFilterChange }) => {
+function AppFooter({
+  doneCount, clearTasks, filter, onFilterChange,
+}) {
   let todoCount = 'Нет задач!';
   if (doneCount) {
     todoCount = `${doneCount} items left`;
@@ -19,7 +21,7 @@ const AppFooter = ({ doneCount, clearTasks, filter, onFilterChange }) => {
       </button>
     </footer>
   );
-};
+}
 
 AppFooter.defaultProps = {
   doneCount: 0,

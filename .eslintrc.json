@@ -9,19 +9,33 @@
     "prettier",
     "airbnb"
   ],
+
   "plugins": ["react"],
-  "parser": "babel-eslint",
+
+  "parser": "@babel/eslint-parser",
+
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "requireConfigFile": false,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "impliedStrict": true,
+      "classes": true
+    }
+  },
+
   "env": {
     "browser": true,
     "jest": true,
     "es2021": true
   },
+
   "rules": {
     "curly": ["error"],
     "max-depth": ["warn", 4],
     "id-length": ["warn", { "exceptions": ["i", "j"], "min": 2 }],
     "no-lonely-if": ["error"],
-    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "no-plusplus": ["off", { "allowForLoopAfterthoughts": true }],
     "no-restricted-syntax": "off",
     "class-methods-use-this": "off",
     "jsx-a11y/href-no-hash": ["off"],
@@ -34,8 +48,10 @@
     ],
     "react/state-in-constructor": ["off"],
     "react/jsx-props-no-spreading": ["off"],
-    "react/static-property-placement": "off"
+    "react/static-property-placement": "off",
+    "import/no-cycle": "off"
   },
+
   "settings": {
     "react": {
       "pragma": "React",

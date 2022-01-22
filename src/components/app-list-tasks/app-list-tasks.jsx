@@ -4,9 +4,13 @@ import PropTypes from 'prop-types';
 import Task from '../app-task';
 import './app-list-tasks.css';
 
-const TaskList = ({ todos, onCompleted, onEdited, onEdit, onDeleted }) => {
+function TaskList({
+  todos, onCompleted, onEdited, onEdit, onDeleted,
+}) {
   const newTask = todos.map((item) => {
-    const { id, description, time, done, edit } = item;
+    const {
+      id, description, time, done, edit,
+    } = item;
     return (
       <Task
         onCompleted={() => onCompleted(id)}
@@ -24,7 +28,7 @@ const TaskList = ({ todos, onCompleted, onEdited, onEdit, onDeleted }) => {
   });
 
   return <ul className="todo-list">{newTask}</ul>;
-};
+}
 
 TaskList.defaultProps = {
   todos: [],
