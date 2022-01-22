@@ -1,3 +1,3 @@
-import NewTaskForm  from "./new-task-panel";
+import NewTaskForm from './new-task-panel';
 
-export default NewTaskForm ;
+export default NewTaskForm;

@@ -1,16 +1,25 @@
-import React from "react";
+import React from 'react';
 
-import NewTaskForm  from "../new-task-panel";
+import NewTaskForm from '../new-task-panel';
 import './app-header.css';
+import App from '../app';
+import PropTypes from 'prop-types';
 
 const AppHeader = ({ onAddItem }) => {
   return (
-    <header className='header'>
+    <header className="header">
       <h1>todos</h1>
-      <NewTaskForm
-        onAddItem={onAddItem}/>
+      <NewTaskForm onAddItem={onAddItem} />
     </header>
-  )
-}
+  );
+};
+
+AppHeader.defaultProps = {
+  onAddItem: () => {},
+};
+
+AppHeader.propTypes = {
+  onAddItem: PropTypes.func,
+};
 
 export default AppHeader;

@@ -1,125 +1,123 @@
-import React, {Component} from "react";
+import React, { Component } from 'react';
 
-import AppMain from "../app-main";
-import AppHeader from "../app-header";
+import AppMain from '../app-main';
+import AppHeader from '../app-header';
 import './app.css';
 
 export default class App extends Component {
-  
   maxId = 100;
-  
+
   state = {
     tasks: [],
-    filter: 'all'
+    filter: 'all',
   };
-  
+
   addItem = (description) => {
     const newItem = {
       description: description,
-      time: 'time',
+      time: Date.now(),
       done: false,
       edit: false,
-      id: this.maxId++
-    }
-    
+      id: this.maxId++,
+    };
+
     this.setState(({ tasks }) => {
       const newTasks = [...tasks];
       newTasks.push(newItem);
-      
+
       return {
-        tasks: newTasks
-      }
-    })
-  }
-  
+        tasks: newTasks,
+      };
+    });
+  };
+
   onDataChange = (id, array, typeChange, props) => {
-      const idx = array.findIndex(el => el.id === id);
-      const newTasks = [...array];
-      if (typeChange === 'change') {
-        newTasks[idx][props] = !newTasks[idx][props];
-      }
-      
-      if (typeChange === 'deleted') {
-        newTasks.splice(idx, 1);
-      }
-      
-      return newTasks;
-  }
-  
+    const idx = array.findIndex((el) => el.id === id);
+    const newTasks = [...array];
+    if (typeChange === 'change') {
+      newTasks[idx][props] = !newTasks[idx][props];
+    }
+
+    if (typeChange === 'deleted') {
+      newTasks.splice(idx, 1);
+    }
+
+    return newTasks;
+  };
+
   onCompleted = (id) => {
     this.setState(({ tasks }) => {
       return {
-        tasks: this.onDataChange(id, tasks, 'change', 'done')
+        tasks: this.onDataChange(id, tasks, 'change', 'done'),
       };
-    })
-  }
-  
+    });
+  };
+
   onEdited = (id) => {
     this.setState(({ tasks }) => {
       return {
-        tasks: this.onDataChange(id, tasks, 'change', 'edit')
+        tasks: this.onDataChange(id, tasks, 'change', 'edit'),
       };
-    })
-  }
-  
+    });
+  };
+
   onEdit = (id, newText) => {
     this.setState(({ tasks }) => {
       const idx = tasks.findIndex((el) => el.id === id);
       const newTasks = [...tasks];
       newTasks[idx].description = newText;
       return {
-        tasks: newTasks
+        tasks: newTasks,
       };
     });
   };
-  
+
   onDeleted = (id) => {
     this.setState(({ tasks }) => {
       return {
-        tasks: this.onDataChange(id, tasks,'deleted')
+        tasks: this.onDataChange(id, tasks, 'deleted'),
       };
-    })
-  }
-  
+    });
+  };
+
   clearTasks = () => {
     this.setState(({ tasks }) => {
       let newTasks = [...tasks];
-      newTasks.length = 0;
+      newTasks = newTasks.filter((el) => !el.done);
       return {
-        tasks: newTasks
-      }
-    })
-  }
-  
+        tasks: newTasks,
+      };
+    });
+  };
+
   onFilterChange = (filter) => {
     this.setState({ filter });
-  }
-  
+  };
+
   filterItems(arr, filter) {
     switch (filter) {
       case 'all':
         return arr;
       case 'active':
-        return arr.filter(el => !el.done);
+        return arr.filter((el) => !el.done);
       case 'completed':
-        return arr.filter(el => el.done);
+        return arr.filter((el) => el.done);
       default:
         return arr;
     }
   }
-  
+
   render() {
     const { tasks, filter } = this.state;
-    
+
     const activeItems = this.filterItems(tasks, filter);
-    const doneCount = tasks.filter(el => !el.done).length;
-    
+    const doneCount = tasks.filter((el) => !el.done).length;
+
     return (
-      <section className='todoapp'>
-        <AppHeader
-          onAddItem={this.addItem}/>
+      <section className="todoapp">
+        <AppHeader onAddItem={this.addItem} />
         <AppMain
-          todos={ activeItems }
+          todos={activeItems}
           onCompleted={this.onCompleted}
           onDeleted={this.onDeleted}
           doneCount={doneCount}
@@ -127,8 +125,9 @@ export default class App extends Component {
           onEdit={this.onEdit}
           clearTasks={this.clearTasks}
           filter={filter}
-          onFilterChange={this.onFilterChange}/>
+          onFilterChange={this.onFilterChange}
+        />
       </section>
-    )
+    );
   }
 }
