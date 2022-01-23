@@ -23,17 +23,19 @@ export default class Task extends Component {
 
   render() {
     const { inputValue } = this.state;
+
     const {
       description, time, id, done, edit, onCompleted, onEdited, onEdit, onDeleted,
     } = this.props;
-    this.onSubmit = (e) => {
-      e.preventDefault();
+
+    this.onSubmit = (event) => {
+      event.preventDefault();
       onEdit(id, inputValue);
       onEdited(id);
     };
 
-    this.onChange = (e) => {
-      this.setState({ inputValue: e.target.value });
+    this.onChange = (event) => {
+      this.setState({ inputValue: event.target.value });
     };
 
     const inputString = (
@@ -42,7 +44,7 @@ export default class Task extends Component {
       </form>
     );
 
-    const date = ` created ${formatDistanceToNow(time, { includeSeconds: true })} ago`;
+    const date = `created ${formatDistanceToNow(time, { includeSeconds: true })} ago`;
 
     let classNames = '';
     let isChecked = false;
@@ -64,8 +66,8 @@ export default class Task extends Component {
             <span className="description">{description}</span>
             <span className="created">{date}</span>
           </label>
-          <button className="icon icon-edit" onClick={onEdited} />
-          <button className="icon icon-destroy" onClick={onDeleted} />
+          <button aria-label="Editing tasks" type="button" className="icon icon-edit" onClick={onEdited} />
+          <button aria-label="Deleting task" type="button" className="icon icon-destroy" onClick={onDeleted} />
         </div>
         {edit ? inputString : null}
       </li>

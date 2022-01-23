@@ -5,11 +5,19 @@ import Task from '../app-task';
 import './app-list-tasks.css';
 
 function TaskList({
-  todos, onCompleted, onEdited, onEdit, onDeleted,
+  todos,
+  onCompleted,
+  onEdited,
+  onEdit,
+  onDeleted,
 }) {
   const newTask = todos.map((item) => {
     const {
-      id, description, time, done, edit,
+      id,
+      description,
+      time,
+      done,
+      edit,
     } = item;
     return (
       <Task
@@ -39,7 +47,7 @@ TaskList.defaultProps = {
 };
 
 TaskList.propTypes = {
-  tasks: PropTypes.array,
+  todos: PropTypes.instanceOf(Array),
   onCompleted: PropTypes.func,
   onEdited: PropTypes.func,
   onEdit: PropTypes.func,

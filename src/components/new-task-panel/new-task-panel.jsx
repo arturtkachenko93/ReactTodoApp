@@ -13,14 +13,14 @@ export default class NewTaskForm extends Component {
     placeholder: 'What needs to be done?',
   };
 
-  onDescriptionChange = (e) => {
+  onDescriptionChange = (event) => {
     this.setState({
-      description: e.target.value,
+      description: event.target.value,
     });
   };
 
-  onSubmit = (e) => {
-    e.preventDefault();
+  onSubmit = (event) => {
+    event.preventDefault();
     if (this.state.description.length <= 3) {
       this.setState({
         description: '',
@@ -44,7 +44,6 @@ export default class NewTaskForm extends Component {
         <input
           className="new-todo"
           placeholder={placeholder}
-          autoFocus
           onChange={this.onDescriptionChange}
           value={this.state.description}
         />

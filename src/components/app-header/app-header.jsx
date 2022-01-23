@@ -1,9 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import NewTaskForm from '../new-task-panel';
 import './app-header.css';
-import App from '../app';
-import PropTypes from 'prop-types';
 
 function AppHeader({ onAddItem }) {
   return (

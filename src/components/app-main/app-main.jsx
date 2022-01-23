@@ -38,7 +38,7 @@ AppMain.defaultProps = {
 
 AppMain.propTypes = {
   doneCount: PropTypes.number,
-  todos: PropTypes.array,
+  todos: PropTypes.instanceOf(Array),
   filter: PropTypes.string,
   onCompleted: PropTypes.func,
   onEdited: PropTypes.func,

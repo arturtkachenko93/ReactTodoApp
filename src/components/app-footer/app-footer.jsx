@@ -16,7 +16,7 @@ function AppFooter({
     <footer className="footer">
       <span className="todo-count">{todoCount}</span>
       <TaskFilters filter={filter} onFilterChange={onFilterChange} />
-      <button className="clear-completed" onClick={clearTasks}>
+      <button type="button" className="clear-completed" onClick={clearTasks}>
         Clear completed
       </button>
     </footer>

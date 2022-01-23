@@ -18,8 +18,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src",
-    "lint:fix": "eslint ./src --fix",
+    "lint": "eslint src --ext .jsx --ext .js ",
+    "lint:fix": "eslint src --ext .jsx --ext .js --fix",
     "format": "prettier --write ./src",
     "prepare": "husky install"
   },
@@ -28,11 +28,6 @@
       "react-app",
       "react-app/jest"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "browserslist": {
     "production": [

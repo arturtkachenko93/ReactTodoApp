@@ -7,7 +7,8 @@
     "plugin:jsx-a11y/recommended",
     "plugin:import/recommended",
     "prettier",
-    "airbnb"
+    "airbnb",
+    "airbnb/hooks"
   ],
 
   "plugins": ["react"],
@@ -33,6 +34,7 @@
   "rules": {
     "curly": ["error"],
     "max-depth": ["warn", 4],
+    "max-len": ["warn", 150],
     "id-length": ["warn", { "exceptions": ["i", "j"], "min": 2 }],
     "no-lonely-if": ["error"],
     "no-plusplus": ["off", { "allowForLoopAfterthoughts": true }],
@@ -46,6 +48,7 @@
         "assert": "either"
       }
     ],
+    "react/destructuring-assignment": ["off"],
     "react/state-in-constructor": ["off"],
     "react/jsx-props-no-spreading": ["off"],
     "react/static-property-placement": "off",
