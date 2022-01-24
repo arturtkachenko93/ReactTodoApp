@@ -87,7 +87,7 @@ export default class App extends Component {
   onFilterChange = (filter) => {
     this.setState({ filter });
   };
-sds
+
   filterItems(arr, filter) {
     switch (filter) {
       case 'all':
