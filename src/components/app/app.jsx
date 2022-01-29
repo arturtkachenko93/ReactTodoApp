@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
-import AppMain from '../app-main';
-import AppHeader from '../app-header';
+import Header from '../header';
 import './app.css';
+import TaskList from '../list-tasks';
+import Footer from '../footer';
 
 export default class App extends Component {
   maxId = 100;
@@ -109,19 +110,22 @@ export default class App extends Component {
 
     return (
       <section className="todoapp">
-        <AppHeader onAddItem={this.addItem} />
-        <AppMain
-          todos={activeItems}
-          onCompleted={this.onCompleted}
-          onDeleted={this.onDeleted}
-          doneCount={doneCount}
-          onEdited={this.onEdited}
-          onEdit={this.onEdit}
-          clearTasks={this.clearTasks}
-          filter={filter}
-          onFilterChange={this.onFilterChange}
-        />
-        ds
+        <Header onAddItem={this.addItem} />
+        <section className="main">
+          <TaskList
+            todos={activeItems}
+            onCompleted={this.onCompleted}
+            onDeleted={this.onDeleted}
+            onEdit={this.onEdit}
+            onEdited={this.onEdited}
+          />
+          <Footer
+            doneCount={doneCount}
+            clearTasks={this.clearTasks}
+            filter={filter}
+            onFilterChange={this.onFilterChange}
+          />
+        </section>
       </section>
     );
   }

@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import NewTaskForm from '../new-task-panel';
-import './app-header.css';
+import './header.css';
 
-function AppHeader({ onAddItem }) {
+function Header({ onAddItem }) {
   return (
     <header className="header">
       <h1>todos</h1>
@@ -13,12 +13,12 @@ function AppHeader({ onAddItem }) {
   );
 }
 
-AppHeader.defaultProps = {
+Header.defaultProps = {
   onAddItem: () => {},
 };
 
-AppHeader.propTypes = {
+Header.propTypes = {
   onAddItem: PropTypes.func,
 };
 
-export default AppHeader;
+export default Header;

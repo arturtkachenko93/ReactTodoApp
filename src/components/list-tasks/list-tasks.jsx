@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Task from '../app-task';
-import './app-list-tasks.css';
+import Task from '../task';
+import './list-tasks.css';
 
 function TaskList({
   todos,
