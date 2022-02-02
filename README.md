@@ -1,3 +1,11 @@
 # My First React App :]
 
- [DEMO](https://todo-buf6vbodb-arturtkachenko93.vercel.app/)
+######TODO-епта
+#[Открыть DEMO (vercel)](https://todo-buf6vbodb-arturtkachenko93.vercel.app/)
+
+# Что реализовано:
+###1. Добавление/удаление/изменение задачи
+###2. Возможность установить задачу как "важная"
+###3. Фильтрация задач
+###4. Время добавления задачи
+
