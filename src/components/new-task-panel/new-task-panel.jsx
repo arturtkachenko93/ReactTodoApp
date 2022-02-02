@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './new-task-panel.css';
 
-export default class NewTaskForm extends Component {
+export default class NewTaskPanel extends Component {
   static defaultProps = {
     onAddItem: () => {},
   };
@@ -52,6 +52,6 @@ export default class NewTaskForm extends Component {
   }
 }
 
-NewTaskForm.propTypes = {
+NewTaskPanel.propTypes = {
   onAddItem: PropTypes.func,
 };

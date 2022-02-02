@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Header from '../header';
 import './app.css';
-import TaskList from '../list-tasks';
+import ListTasks from '../list-tasks';
 import Footer from '../footer';
 
 export default class App extends Component {
@@ -112,7 +112,7 @@ export default class App extends Component {
       <section className="todoapp">
         <Header onAddItem={this.addItem} />
         <section className="main">
-          <TaskList
+          <ListTasks
             todos={activeItems}
             onCompleted={this.onCompleted}
             onDeleted={this.onDeleted}
