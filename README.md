@@ -1,5 +1,5 @@
 # My First React App :]
-[Открыть DEMO (vercel)](https://todo-buf6vbodb-arturtkachenko93.vercel.app/)
+[Открыть DEMO (vercel)](https://todo-arturtkachenko93.vercel.app/)
 
 # Что реализовано:
 #### 1. Добавление/удаление/изменение задачи
