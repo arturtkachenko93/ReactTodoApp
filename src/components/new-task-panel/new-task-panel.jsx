@@ -11,6 +11,8 @@ export default class NewTaskPanel extends Component {
   state = {
     description: '',
     placeholder: 'What needs to be done?',
+    minutes: 0,
+    seconds: 0,
   };
 
   onDescriptionChange = (event) => {
@@ -19,34 +21,53 @@ export default class NewTaskPanel extends Component {
     });
   };
 
+  onChangeMin = (e) => {
+    const toSeconds = e.target.value * 60;
+
+    this.setState({
+      minutes: toSeconds,
+    });
+  };
+
+  onChangeSec = (e) => {
+    this.setState({
+      seconds: e.target.value,
+    });
+  };
+
   onSubmit = (event) => {
     event.preventDefault();
-    if (this.state.description.length <= 3) {
+    if (this.state.description.length <= 1) {
       this.setState({
         description: '',
-        placeholder: 'Нужно больше текста, бро ... :(',
+        placeholder: 'Press F',
       });
       return;
     }
 
-    this.props.onAddItem(this.state.description);
+    this.props.onAddItem(this.state.description, Number(this.state.minutes) + Number(this.state.seconds));
     this.setState({
       description: '',
       placeholder: 'What needs to be done?',
     });
+
+    event.target.reset();
   };
 
   render() {
     const { placeholder } = this.state;
-
     return (
-      <form onSubmit={this.onSubmit}>
+      <form className="new-todo-form" onSubmit={this.onSubmit}>
         <input
+          type="text"
           className="new-todo"
           placeholder={placeholder}
           onChange={this.onDescriptionChange}
           value={this.state.description}
         />
+        <input className="new-todo-form__timer" type="number" placeholder="Min" min="0" onChange={this.onChangeMin} />
+        <input className="new-todo-form__timer" type="number" placeholder="Sec" min="0" max="59" onChange={this.onChangeSec} />
+        <input type="submit" className="hidden" />
       </form>
     );
   }

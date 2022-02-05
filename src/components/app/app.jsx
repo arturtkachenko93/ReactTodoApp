@@ -13,13 +13,14 @@ export default class App extends Component {
     filter: 'all',
   };
 
-  addItem = (description) => {
+  addItem = (description, allSeconds) => {
     const newItem = {
       description,
       time: Date.now(),
       done: false,
       edit: false,
       id: this.maxId++,
+      allSeconds,
     };
 
     this.setState(({ tasks }) => {
@@ -104,7 +105,7 @@ export default class App extends Component {
 
   render() {
     const { tasks, filter } = this.state;
-
+    console.log(this.state);
     const activeItems = this.filterItems(tasks, filter);
     const doneCount = tasks.filter((el) => !el.done).length;
 
