@@ -1,97 +1,81 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 import Header from '../header';
 import './app.css';
 import ListTasks from '../list-tasks';
 import Footer from '../footer';
 
-export default class App extends Component {
-  maxId = 100;
+function App() {
+  const [tasks, setTasks] = useState([]);
+  const [filter, setFilter] = useState('all');
 
-  state = {
-    tasks: [],
-    filter: 'all',
-  };
-
-  addItem = (description, allSeconds) => {
+  const addItem = (description, allSeconds) => {
+    let id = Date.now() * Math.floor(Math.random() * 10000);
     const newItem = {
       description,
       time: Date.now(),
       done: false,
       edit: false,
-      id: this.maxId++,
+      id: id++,
       allSeconds,
     };
 
-    this.setState(({ tasks }) => {
-      const newTasks = [...tasks];
-      newTasks.push(newItem);
+    setTasks(() => [...tasks, newItem]);
+  };
 
-      return {
-        tasks: newTasks,
+  const onCompleted = (id) => {
+    setTasks((arrayTasks) => {
+      const idx = arrayTasks.findIndex((task) => task.id === id);
+      const newItem = {
+        ...arrayTasks[idx],
+        done: !arrayTasks[idx].done,
       };
+
+      return [...arrayTasks.slice(0, idx), newItem, ...arrayTasks.slice(idx + 1)];
     });
   };
 
-  onDataChange = (id, array, typeChange, props) => {
-    const idx = array.findIndex((el) => el.id === id);
-    const newTasks = [...array];
-    if (typeChange === 'change') {
-      newTasks[idx][props] = !newTasks[idx][props];
-    }
-
-    if (typeChange === 'deleted') {
-      newTasks.splice(idx, 1);
-    }
-
-    return newTasks;
-  };
-
-  onCompleted = (id) => {
-    this.setState(({ tasks }) => ({
-      tasks: this.onDataChange(id, tasks, 'change', 'done'),
-    }));
-  };
-
-  onEdited = (id) => {
-    this.setState(({ tasks }) => ({
-      tasks: this.onDataChange(id, tasks, 'change', 'edit'),
-    }));
-  };
-
-  onEdit = (id, newText) => {
-    this.setState(({ tasks }) => {
-      const idx = tasks.findIndex((el) => el.id === id);
-      const newTasks = [...tasks];
-      newTasks[idx].description = newText;
-      return {
-        tasks: newTasks,
+  const onEdited = (id) => {
+    setTasks((arrayTasks) => {
+      const idx = arrayTasks.findIndex((task) => task.id === id);
+      const newItem = {
+        ...arrayTasks[idx],
+        edit: !arrayTasks[idx].edit,
       };
+
+      return [...arrayTasks.slice(0, idx), newItem, ...arrayTasks.slice(idx + 1)];
     });
   };
 
-  onDeleted = (id) => {
-    this.setState(({ tasks }) => ({
-      tasks: this.onDataChange(id, tasks, 'deleted'),
-    }));
-  };
-
-  clearTasks = () => {
-    this.setState(({ tasks }) => {
-      let newTasks = [...tasks];
-      newTasks = newTasks.filter((el) => !el.done);
-      return {
-        tasks: newTasks,
+  const onEdit = (id, newText) => {
+    setTasks((arrayTasks) => {
+      const idx = arrayTasks.findIndex((task) => task.id === id);
+      const newItem = {
+        ...arrayTasks[idx],
+        description: newText,
       };
+
+      return [...arrayTasks.slice(0, idx), newItem, ...arrayTasks.slice(idx + 1)];
     });
   };
 
-  onFilterChange = (filter) => {
-    this.setState({ filter });
+  const onDeleted = (id) => {
+    setTasks((arrayTasks) => {
+      const idx = arrayTasks.findIndex((el) => el.id === id);
+      return [...arrayTasks.slice(0, idx), ...arrayTasks.slice(idx + 1)];
+    });
   };
 
-  filterItems(arr, filter) {
-    switch (filter) {
+  const clearTasks = () => {
+    setTasks(() => tasks.filter((item) => !item.done));
+  };
+
+  const onFilterChange = (status) => {
+    setFilter(() => status);
+  };
+
+  const filterItems = (arr, status) => {
+    switch (status) {
       case 'all':
         return arr;
       case 'active':
@@ -101,33 +85,32 @@ export default class App extends Component {
       default:
         return arr;
     }
-  }
+  };
 
-  render() {
-    const { tasks, filter } = this.state;
-    console.log(this.state);
-    const activeItems = this.filterItems(tasks, filter);
-    const doneCount = tasks.filter((el) => !el.done).length;
+  const activeItems = filterItems(tasks, filter);
+  const doneCount = tasks.filter((el) => !el.done).length;
 
-    return (
-      <section className="todoapp">
-        <Header onAddItem={this.addItem} />
-        <section className="main">
-          <ListTasks
-            todos={activeItems}
-            onCompleted={this.onCompleted}
-            onDeleted={this.onDeleted}
-            onEdit={this.onEdit}
-            onEdited={this.onEdited}
-          />
-          <Footer
-            doneCount={doneCount}
-            clearTasks={this.clearTasks}
-            filter={filter}
-            onFilterChange={this.onFilterChange}
-          />
-        </section>
+  return (
+    <section className="todoapp">
+      <Header onAddItem={addItem} />
+      <section className="main">
+        <ListTasks
+          todos={activeItems}
+          onCompleted={onCompleted}
+          onDeleted={onDeleted}
+          onEdit={onEdit}
+          onEdited={onEdited}
+        />
+        <Footer
+          doneCount={doneCount}
+          clearTasks={clearTasks}
+          filter={filter}
+          setFilter={setFilter}
+          onFilterChange={onFilterChange}
+        />
       </section>
-    );
-  }
+    </section>
+  );
 }
+
+export default App;

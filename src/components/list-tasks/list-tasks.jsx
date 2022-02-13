@@ -11,23 +11,25 @@ function ListTasks({
   onEdit,
   onDeleted,
 }) {
-  const newTask = todos.map((item) => {
-    const {
-      id,
-    } = item;
-    return (
-      <Task
-        key={id}
-        onCompleted={() => onCompleted(id)}
-        onDeleted={() => onDeleted(id)}
-        onEdited={() => onEdited(id)}
-        onEdit={onEdit}
-        {...item}
-      />
-    );
-  });
-
-  return <ul className="todo-list">{newTask}</ul>;
+  return (
+    <ul className="todo-list">
+      {todos.map((item) => {
+        const {
+          id,
+        } = item;
+        return (
+          <Task
+            key={id}
+            onCompleted={() => onCompleted(id)}
+            onDeleted={() => onDeleted(id)}
+            onEdited={() => onEdited(id)}
+            onEdit={onEdit}
+            {...item}
+          />
+        );
+      })}
+    </ul>
+  );
 }
 
 ListTasks.defaultProps = {
